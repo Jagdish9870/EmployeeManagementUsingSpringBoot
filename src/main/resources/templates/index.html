@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+               th:replace="~{ base::layout(~{::title},~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+</head>
+<body>
+	<section>
+		
+		<div class="container mt-5">
+		       <!-- Page Heading -->
+		       <h2 class="text-center mb-4">Employee Details</h2>
+			   <th:block th:if="${session.msg}">
+			   		<p class="text-center text-success fs-4">[[${session.msg}]]</p>
+			   		<th:block th:text="${@empServiceImpl.removeSessionMessage()}"></th:block>
+				</th:block>
+		       <!-- Employee Table -->
+		       <div class="table-responsive">
+		           <table class="table table-bordered table-striped table-hover">
+		               <thead class="table-dark text-center">
+		                   <tr>
+		                       <th>Id</th>
+		                       <th>Full Name</th>
+		                       <th>Email</th>
+		                       <th>Address</th>
+		                       <th>Gender</th>
+		                       <th>Action</th>
+		                   </tr>
+		               </thead>
+		               <tbody>
+		                   <!-- Example Rows -->
+		                   <tr th:each="e,c:${empList}">
+		                       <td>[[${c.count}]]</td>
+		                       <td>[[${e.name}]]</td>
+		                       <td>[[${e.email}]]</td>
+		                       <td>[[${e.address}]]</td>
+		                       <td>[[${e.gender}]]</td>
+		                       <td class="text-center">
+		                           <a th:href="@{'editEmp/'+${e.id}}" class="btn btn-sm btn-info me-2">Edit</a>
+		                           <a th:href="@{'deleteEmpdtls/'+${e.id}}" class="btn btn-sm btn-danger">Delete</a>
+		                       </td>
+		                   </tr>
+		                  
+		                   <!-- Additional rows can be dynamically added here -->
+		               </tbody>
+		           </table>
+		       </div>
+		   </div>
+
+	</section>
+  
+</body>
+</html>
